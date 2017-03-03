@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script src="DeleteConnection.js?relNum=1.0.0.1"></script>
+    <title>Delete Connection Test Cases</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var objGraphData;
+        var objEdge;
+        var objG;
+        var objDisplay;
+
+        var  DisplayRsult= function(objR) {
+            document.write("Output:");
+            if (!objR){
+                document.writeln("no return.<br/><br/><br/>");
+                return;
+            }
+
+            if (objR.ErrMsg) {
+                document.writeln(objR.ErrMsg + "<br/><br/><br/>");
+                return;
+            }
+
+            document.writeln(objR.deleteNodes.toString() + "<br/><br/>");
+            document.writeln();
+            return;
+        }
+    </script>
+    <!-- Test case: no nodes-->
+    <script type="text/javascript">
+        objGraphData = {};
+        objEdge = {};
+        document.writeln("Input:" + JSON.stringify(objGraphData) + "<br/>" + "remove: " + JSON.stringify(objEdge));
+        objG = new DirectedGraph();
+        objG.initGraph(objGraphData);
+        objDisplay = objG.delConnection(objEdge);
+        DisplayRsult(objDisplay);
+    </script>
+
+    <!-- Test case: remove edge in simple directed graph-->
+    <script type="text/javascript">
+        objGraphData = {
+            "nodes": [{
+                "id": "M00"
+            }, {
+                "id": "M01"
+            }, {
+                "id": "M02"
+            }
+            ],
+            "edges": [{
+                "from": "M01",
+                "to": "M02"
+            }, {
+                "from": "M00",
+                "to": "M02"
+            }, {
+                "from": "M01",
+                "to": "M00"
+            }
+            ],
+            "root": "M00"
+        }
+
+        objEdge = {"from":"M01","to":"M02"};
+        document.writeln("Input:" + JSON.stringify(objGraphData) + "<br/>" + "remove: " + JSON.stringify(objEdge) + "<br/>");
+        objG = new DirectedGraph();
+        objG.initGraph(objGraphData);
+        objDisplay = objG.delConnection(objEdge);
+        DisplayRsult(objDisplay);
+
+    </script>
+
+    <!-- Test case: remove edge in directed graph with loop -->
+    <script type="text/javascript">
+        objGraphData = {
+            "root": "M00",
+            "edges": [{
+                "from": "M02",
+                "to": "M00"
+            }, {
+                "from": "M01",
+                "to": "M02"
+            }, {
+                "from": "M04",
+                "to": "M02"
+            }, {
+                "from": "M10",
+                "to": "M01"
+            }, {
+                "from": "M01",
+                "to": "M03"
+            }, {
+                "from": "M01",
+                "to": "M04"
+            }, {
+                "from": "M07",
+                "to": "M10"
+            }, {
+                "from": "M06",
+                "to": "M07"
+            }, {
+                "from": "M08",
+                "to": "M07"
+            }, {
+                "from": "M03",
+                "to": "M06"
+            }, {
+                "from": "M05",
+                "to": "M06"
+            }, {
+                "from": "M06",
+                "to": "M08"
+            }, {
+                "from": "M06",
+                "to": "M09"
+            }, {
+                "from": "M06",
+                "to": "M11"
+            }, {
+                "from": "M03",
+                "to": "M05"
+            }, {
+                "from": "M11",
+                "to": "M09"
+            }, {
+                "from": "M07",
+                "to": "M08"
+            }
+            ],
+            "nodes": [{
+                "id": "M02"
+            }, {
+                "id": "M05"
+            }, {
+                "id": "M08"
+            }, {
+                "id": "M07"
+            }, {
+                "id": "M03"
+            }, {
+                "id": "M10"
+            }, {
+                "id": "M04"
+            }, {
+                "id": "M06"
+            }, {
+                "id": "M01"
+            }, {
+                "id": "M11"
+            }, {
+                "id": "M00"
+            }, {
+                "id": "M09"
+            }
+            ]
+        }
+
+        document.writeln("Input:" + JSON.stringify(objGraphData) + "<br/>" + "remove: " + JSON.stringify(objEdge) + "<br/>");
+        objG = new DirectedGraph();
+        objG.initGraph(objGraphData);
+        objDisplay = objG.delConnection(objEdge);
+        DisplayRsult(objDisplay);
+    </script>
+
+    <!-- Test case: remove an edge that not exist -->
+    <script type="text/javascript">
+        objGraphData = {
+            "nodes": [{
+                "id": "M00"
+            }, {
+                "id": "M01"
+            }, {
+                "id": "M02"
+            }
+            ],
+            "edges": [{
+                "from": "M01",
+                "to": "M02"
+            }, {
+                "from": "M00",
+                "to": "M02"
+            }, {
+                "from": "M01",
+                "to": "M00"
+            }
+            ],
+            "root": "M00"
+        }
+
+        objEdge = { "from": "M00", "to": "M01" };
+        document.writeln("Input:" + JSON.stringify(objGraphData) + "<br/>" + "remove: " + JSON.stringify(objEdge) + "<br/>");
+        objG = new DirectedGraph();
+        objG.initGraph(objGraphData);
+        objDisplay = objG.delConnection(objEdge);
+        DisplayRsult(objDisplay);
+
+    </script>
+
+</body>
+</html>

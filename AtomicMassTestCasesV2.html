@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script src="MassWeightV2.js?relNum=1.0.0.2"></script>
+    <title>AtomicMass Test Cases</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var objMalformedInput;
+        var objDisplay;
+
+        function DisplayRsult(objR) {
+            document.write("Output:");
+            if (!objR){
+                document.writeln("no return.<br/><br/><br/>");
+                return;
+            }
+
+            if (objR.ErrMsg) {
+                document.writeln(objR.ErrMsg + "<br/><br/><br/>");
+                return;
+            }
+
+            if (objR.GramsResult)
+                document.writeln(objR.GramsResult + "grams  ");
+            if (objR.PoundResult)
+                document.writeln(objR.PoundResult + "lbs<br/><br/>");
+
+            return;
+        }
+    </script>
+    <!-- Test case: Under specified component-->
+    <script type="text/javascript">
+        document.writeln("Input:<br/>");
+        objDisplay = CalculateAtomicMass();
+        DisplayRsult(objDisplay);
+    </script>
+
+    <!-- Test case: Under specified component-->
+    <script type="text/javascript">
+        objMalformedInput = {
+            "component": [{
+                "name": "carbon",
+                "mass": 1.6,
+                "units": "kilograms"
+            }, {
+                "name": "sulfur",
+                "mass": 36,
+                "units": "mol"
+            }, {
+                "name": "oxygen",
+                "mass": 871,
+                "units": "grams"
+            }
+            ]
+        }
+
+        document.writeln("Input:" + JSON.stringify(objMalformedInput) + "<br/>");
+        objDisplay = CalculateAtomicMass(objMalformedInput);
+        DisplayRsult(objDisplay);
+
+    </script>
+
+    <!-- Test case: calculation -->
+    <script type="text/javascript">
+        objMalformedInput = {
+            "components": [{
+                "name": "carbon",
+                "mass": 1.6,
+                "units": "kilograms"
+            }, {
+                "name": "sulfur",
+                "mass": 36,
+                "units": "mol"
+            }, {
+                "name": "oxygen",
+                "mass": 871,
+                "units": "grams"
+            }
+            ]
+        }
+        document.writeln("Input:" + JSON.stringify(objMalformedInput) + "<br/>");
+        objDisplay = CalculateAtomicMass(objMalformedInput);
+        DisplayRsult(objDisplay);
+
+    </script>
+
+    <!-- Test case: calculation -->
+    <script type="text/javascript">
+        objMalformedInput = {
+            "components": [{
+                "name": "Hydrogen",
+                "mass": 2,
+                "units": "mol"
+            }, {
+                "name": "oxygen",
+                "mass": 1,
+                "units": "mol"
+            }
+            ]
+        }
+        document.writeln("Input:" + JSON.stringify(objMalformedInput) + "<br/>");
+        objDisplay = CalculateAtomicMass(objMalformedInput);
+        DisplayRsult(objDisplay);
+
+    </script>
+
+    <!-- Test case: missing units -->
+    <script type="text/javascript">
+        objMalformedInput = {
+            "components": [{
+                "name": "carbon",
+                "mass": 1.6,
+                "units": "kilograms"
+            }, {
+                "name": "sulfur",
+                "mass": 36,
+                "units": "mol"
+            }, {
+                "name": "oxygen",
+                "mass": 871
+            }
+            ]
+        }
+        document.writeln("Input:" + JSON.stringify(objMalformedInput) + "<br/>");
+        objDisplay = CalculateAtomicMass(objMalformedInput);
+        DisplayRsult(objDisplay);
+
+    </script>
+    <!-- Test case: Unknown units -->
+    <script type="text/javascript">
+        objMalformedInput = {
+            "components": [{
+                "name": "carbon",
+                "mass": 1.6,
+                "units": "kilograms"
+            }, {
+                "name": "sulfur",
+                "mass": 36,
+                "units": "mol"
+            }, {
+                "name": "oxygen",
+                "mass": 871,
+                "units": "g"
+            }
+            ]
+        }
+        document.writeln("Input:" + JSON.stringify(objMalformedInput) + "<br/>");
+        objDisplay = CalculateAtomicMass(objMalformedInput);
+        DisplayRsult(objDisplay);
+
+    </script>
+
+    <!-- Test case: different number format -->
+    <script type="text/javascript">
+        objMalformedInput = {
+            "components": [{
+                "name": "carbon",
+                "mass": 1.6,
+                "units": "kilograms"
+            }, {
+                "name": "sulfur",
+                "mass": "1,200",
+                "units": "mol"
+            }, {
+                "name": "oxygen",
+                "mass": 871,
+                "units": "grams"
+            }
+            ]
+        }
+        document.writeln("Input:" + JSON.stringify(objMalformedInput) + "<br/>");
+        objDisplay = CalculateAtomicMass(objMalformedInput);
+        DisplayRsult(objDisplay);
+
+    </script>
+
+    <!-- Test case: special characters -->
+    <script type="text/javascript">
+        objMalformedInput = {
+            "components": [{
+                "name": "carbon",
+                "mass": 1.6,
+                "units": "kilograms"
+            }, {
+                "name": "sulfur",
+                "mass": 36,
+                "units": "mol"
+            }, {
+                "name": "oxygen",
+                "mass": 871,
+                "units": "grams"
+            }
+            ]
+        }
+    </script>
+</body>
+</html>
